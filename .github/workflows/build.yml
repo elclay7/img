@@ -27,14 +27,27 @@ jobs:
 
       - name: Build docs site
         run: |
+          echo "Cleaning docs/"
           rm -rf docs
           mkdir -p docs/img
+
+          echo "Copying source files"
           cp src/index.html docs/
           cp img/* docs/img/
-          python src/build.py --img-dir docs/img --output docs/images.js
+
+          echo "Generating images.js"
+          python3 src/build.py --img-dir docs/img --output docs/images.js
+
+          echo "Copying CNAME if present"
           if [ -f CNAME ]; then
             cp CNAME docs/CNAME
           fi
+
+          echo "Generated docs contents:"
+          ls -la docs/
+          ls -la docs/img/
+          echo "images.js preview:"
+          head -20 docs/images.js
 
       - name: Commit and push docs
         run: |

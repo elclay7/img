@@ -74,44 +74,6 @@
       background-clip: text;
     }
 
-    .search-box {
-      flex: 1;
-      min-width: 220px;
-      position: relative;
-    }
-
-    .search-box input {
-      width: 100%;
-      padding: 12px 16px 12px 44px;
-      border-radius: 999px;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      background: var(--surface);
-      color: var(--text);
-      font-size: 15px;
-      outline: none;
-      transition: border-color 0.2s, background 0.2s;
-    }
-
-    .search-box input:focus {
-      border-color: var(--accent);
-      background: var(--surface-hover);
-    }
-
-    .search-box input::placeholder {
-      color: var(--text-muted);
-    }
-
-    .search-box svg {
-      position: absolute;
-      left: 16px;
-      top: 50%;
-      transform: translateY(-50%);
-      width: 18px;
-      height: 18px;
-      color: var(--text-muted);
-      pointer-events: none;
-    }
-
     main {
       max-width: 1440px;
       margin: 0 auto;
@@ -219,15 +181,13 @@
       opacity: 1;
     }
 
-    .empty,
-    .no-results {
+    .empty {
       text-align: center;
       padding: 80px 24px;
       color: var(--text-muted);
     }
 
-    .empty h2,
-    .no-results h2 {
+    .empty h2 {
       margin: 0 0 8px;
       color: var(--text);
     }
@@ -288,13 +248,6 @@
       <a class="logo" href="./" aria-label="Inicio">
         <span>img</span>.repo
       </a>
-      <div class="search-box">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <circle cx="11" cy="11" r="8"></circle>
-          <path d="m21 21-4.35-4.35"></path>
-        </svg>
-        <input type="text" id="search" placeholder="Buscar imágenes o GIFs..." autocomplete="off" />
-      </div>
     </div>
   </header>
 
@@ -304,10 +257,7 @@
       <h2>No hay imágenes aún</h2>
       <p>Agrega archivos a la carpeta <code>img/</code> y haz push a <code>main</code>.</p>
     </div>
-    <div id="no-results" class="no-results" style="display: none;">
-      <h2>No se encontraron resultados</h2>
-      <p>Prueba con otra búsqueda.</p>
-    </div>
+
   </main>
 
   <div id="toast" class="toast" role="status" aria-live="polite">
@@ -322,11 +272,10 @@
     (function () {
       const grid = document.getElementById("grid");
       const empty = document.getElementById("empty");
-      const noResults = document.getElementById("no-results");
-      const searchInput = document.getElementById("search");
       const toast = document.getElementById("toast");
 
       const images = Array.isArray(window.IMAGES) ? window.IMAGES : [];
+      console.log("[img repo] loaded images:", images.length, images);
 
       function getAbsoluteUrl(path) {
         return new URL(path, window.location.href).href;
@@ -425,33 +374,14 @@
         grid.innerHTML = "";
         if (images.length === 0) {
           empty.style.display = "block";
-          noResults.style.display = "none";
           grid.style.display = "none";
           return;
         }
 
         empty.style.display = "none";
         grid.style.display = "grid";
-
-        if (items.length === 0) {
-          noResults.style.display = "block";
-          grid.style.display = "none";
-          return;
-        }
-
-        noResults.style.display = "none";
         items.forEach((image) => grid.appendChild(createCard(image)));
       }
-
-      searchInput.addEventListener("input", (e) => {
-        const query = e.target.value.trim().toLowerCase();
-        if (!query) {
-          render(images);
-          return;
-        }
-        const filtered = images.filter((img) => img.name.toLowerCase().includes(query));
-        render(filtered);
-      });
 
       render(images);
     })();
