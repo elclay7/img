@@ -31,12 +31,11 @@ jobs:
           rm -rf docs
           mkdir -p docs/img
 
-          echo "Copying source files"
-          cp src/index.html docs/
+          echo "Copying images"
           cp img/* docs/img/
 
-          echo "Generating images.js"
-          python3 src/build.py --img-dir docs/img --output docs/images.js
+          echo "Generating docs/index.html with embedded images"
+          python3 src/build.py --img-dir docs/img --template src/index.html --output docs/index.html
 
           echo "Copying CNAME if present"
           if [ -f CNAME ]; then
@@ -46,8 +45,6 @@ jobs:
           echo "Generated docs contents:"
           ls -la docs/
           ls -la docs/img/
-          echo "images.js preview:"
-          head -20 docs/images.js
 
       - name: Commit and push docs
         run: |

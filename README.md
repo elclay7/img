@@ -6,8 +6,7 @@ Repositorio personal de imágenes y GIFs con un sitio estático al estilo Giphy,
 
 - Subes tus imágenes a la carpeta `img/` en la raíz del repo y haces push a `main`.
 - Un **GitHub Action** genera automáticamente la carpeta `docs/` con:
-  - `docs/index.html` (copia de `src/index.html`)
-  - `docs/images.js` (catálogo generado)
+  - `docs/index.html` (con las imágenes embebidas directamente)
   - `docs/img/` (copia de tus imágenes)
   - `docs/CNAME` (para tu dominio personalizado)
 - GitHub Pages sirve el sitio desde `/docs` en la rama `main`.
@@ -56,7 +55,6 @@ Tu repo ya está configurado para servir desde `/docs` en `main`. Si necesitas v
 │   └── build.py
 ├── docs/                         # Sitio generado (NO editar manualmente)
 │   ├── index.html
-│   ├── images.js
 │   ├── img/
 │   └── CNAME
 ├── CNAME                         # Dominio personalizado
@@ -66,7 +64,6 @@ Tu repo ya está configurado para servir desde `/docs` en `main`. Si necesitas v
 ## Funciones del sitio
 
 - Galería responsive al estilo Giphy.
-- Buscador por nombre de archivo.
 - Hover overlay con icono de link.
 - Copia el link directo de la imagen al portapapeles con un clic.
 - Soporte para imágenes estáticas y GIFs animados.
