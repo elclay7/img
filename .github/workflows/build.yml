@@ -6,8 +6,8 @@ on:
       - main
     paths:
       - "img/**"
-      - "index.html"
-      - "build.py"
+      - "src/**"
+      - "CNAME"
       - ".github/workflows/**"
 
 permissions:
@@ -29,9 +29,12 @@ jobs:
         run: |
           rm -rf docs
           mkdir -p docs/img
-          cp index.html docs/
+          cp src/index.html docs/
           cp img/* docs/img/
-          python build.py --img-dir docs/img --output docs/images.js
+          python src/build.py --img-dir docs/img --output docs/images.js
+          if [ -f CNAME ]; then
+            cp CNAME docs/CNAME
+          fi
 
       - name: Commit and push docs
         run: |

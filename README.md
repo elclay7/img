@@ -6,11 +6,12 @@ Repositorio personal de imágenes y GIFs con un sitio estático al estilo Giphy,
 
 - Subes tus imágenes a la carpeta `img/` en la raíz del repo y haces push a `main`.
 - Un **GitHub Action** genera automáticamente la carpeta `docs/` con:
-  - `docs/index.html`
-  - `docs/images.js` (catálogo)
+  - `docs/index.html` (copia de `src/index.html`)
+  - `docs/images.js` (catálogo generado)
   - `docs/img/` (copia de tus imágenes)
+  - `docs/CNAME` (para tu dominio personalizado)
 - GitHub Pages sirve el sitio desde `/docs` en la rama `main`.
-- No necesitas ejecutar `build.py` en tu máquina ni tocar la carpeta `docs/`.
+- **No toques la carpeta `docs/` manualmente.** Se regenera automáticamente.
 
 ## Subir una nueva imagen
 
@@ -18,8 +19,10 @@ Repositorio personal de imágenes y GIFs con un sitio estático al estilo Giphy,
 2. Haz commit y push a `main`:
 
    ```bash
-   git add img/nueva-imagen.gif
-   git commit -m "add: nueva imagen"
+   git pull origin main
+   cp mi-imagen.gif img/
+   git add img/mi-imagen.gif
+   git commit -m "add: mi-imagen.gif"
    git push origin main
    ```
 
@@ -44,11 +47,21 @@ Tu repo ya está configurado para servir desde `/docs` en `main`. Si necesitas v
 
 ## Estructura
 
-- `index.html` — Plantilla del sitio.
-- `build.py` — Script que escanea imágenes y genera `images.js`.
-- `img/` — **Agrega tus imágenes aquí.**
-- `docs/` — Sitio generado automáticamente por GitHub Actions.
-- `.github/workflows/build.yml` — Workflow que genera `docs/` en cada push.
+```
+/
+├── .github/workflows/build.yml   # GitHub Action que genera docs/
+├── img/                          # TUS IMÁGENES (agrega aquí)
+├── src/                          # Código fuente del sitio
+│   ├── index.html
+│   └── build.py
+├── docs/                         # Sitio generado (NO editar manualmente)
+│   ├── index.html
+│   ├── images.js
+│   ├── img/
+│   └── CNAME
+├── CNAME                         # Dominio personalizado
+└── README.md
+```
 
 ## Funciones del sitio
 
