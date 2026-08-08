@@ -11,11 +11,9 @@
     :root {
       --bg: #0f0f0f;
       --surface: #1a1a1a;
-      --surface-hover: #252525;
       --text: #ffffff;
       --text-muted: #a0a0a0;
       --accent: #8c5cff;
-      --accent-hover: #a37fff;
       --radius: 12px;
       --shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
     }
@@ -52,8 +50,6 @@
       padding: 16px 24px;
       display: flex;
       align-items: center;
-      gap: 24px;
-      flex-wrap: wrap;
     }
 
     .logo {
@@ -92,7 +88,6 @@
       overflow: hidden;
       background: var(--surface);
       box-shadow: var(--shadow);
-      cursor: pointer;
       transform: translateZ(0);
       transition: transform 0.2s ease, box-shadow 0.2s ease;
     }
@@ -102,8 +97,7 @@
       box-shadow: 0 16px 40px rgba(0, 0, 0, 0.55);
     }
 
-    .card img,
-    .card video {
+    .card img {
       display: block;
       width: 100%;
       height: 220px;
@@ -111,8 +105,7 @@
       transition: transform 0.3s ease;
     }
 
-    .card:hover img,
-    .card:hover video {
+    .card:hover img {
       transform: scale(1.05);
     }
 
@@ -131,7 +124,7 @@
       opacity: 1;
     }
 
-    .copy-btn {
+    .link-btn {
       width: 52px;
       height: 52px;
       border-radius: 50%;
@@ -145,18 +138,19 @@
       box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25);
       transform: translateY(10px);
       transition: transform 0.2s ease, background 0.2s ease;
+      text-decoration: none;
     }
 
-    .card:hover .copy-btn {
+    .card:hover .link-btn {
       transform: translateY(0);
     }
 
-    .copy-btn:hover {
+    .link-btn:hover {
       background: #fff;
       transform: scale(1.1);
     }
 
-    .copy-btn svg {
+    .link-btn svg {
       width: 24px;
       height: 24px;
     }
@@ -175,68 +169,27 @@
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
+      pointer-events: none;
     }
 
     .card:hover .filename {
       opacity: 1;
     }
 
-    .empty {
+    .tip {
       text-align: center;
-      padding: 80px 24px;
+      padding: 40px 24px;
       color: var(--text-muted);
-    }
-
-    .empty h2 {
-      margin: 0 0 8px;
-      color: var(--text);
-    }
-
-    .toast {
-      position: fixed;
-      bottom: 28px;
-      left: 50%;
-      transform: translateX(-50%) translateY(100px);
-      background: var(--surface);
-      color: var(--text);
-      padding: 14px 24px;
-      border-radius: 999px;
-      box-shadow: var(--shadow);
-      border: 1px solid rgba(255, 255, 255, 0.08);
       font-size: 14px;
-      font-weight: 600;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      opacity: 0;
-      transition: transform 0.3s ease, opacity 0.3s ease;
-      z-index: 100;
-      pointer-events: none;
-    }
-
-    .toast.show {
-      transform: translateX(-50%) translateY(0);
-      opacity: 1;
-    }
-
-    .toast svg {
-      width: 18px;
-      height: 18px;
-      color: #3ddc84;
     }
 
     @media (max-width: 640px) {
-      .header-inner {
-        gap: 16px;
-      }
-
       .grid {
         grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
         gap: 12px;
       }
 
-      .card img,
-      .card video {
+      .card img {
         height: 160px;
       }
     }
@@ -252,208 +205,182 @@
   </header>
 
   <main>
-    <div id="grid" class="grid"></div>
-    <div id="empty" class="empty" style="display: none;">
-      <h2>No hay imágenes aún</h2>
-      <p>Edita este archivo y agrega imágenes al array <code>IMAGES</code>.</p>
+    <div class="grid">
+      <!-- Para agregar una imagen, copia una tarjeta y cambia el nombre y la extensión -->
+
+      <div class="card">
+        <img src="img/alert.gif" alt="alert.gif" loading="lazy" />
+        <div class="overlay">
+          <a class="link-btn" href="img/alert.gif" target="_blank" aria-label="Abrir alert.gif">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+              <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+            </svg>
+          </a>
+        </div>
+        <div class="filename">alert.gif</div>
+      </div>
+
+      <div class="card">
+        <img src="img/beme1.png" alt="beme1.png" loading="lazy" />
+        <div class="overlay">
+          <a class="link-btn" href="img/beme1.png" target="_blank" aria-label="Abrir beme1.png">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+              <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+            </svg>
+          </a>
+        </div>
+        <div class="filename">beme1.png</div>
+      </div>
+
+      <div class="card">
+        <img src="img/beme2.png" alt="beme2.png" loading="lazy" />
+        <div class="overlay">
+          <a class="link-btn" href="img/beme2.png" target="_blank" aria-label="Abrir beme2.png">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+              <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+            </svg>
+          </a>
+        </div>
+        <div class="filename">beme2.png</div>
+      </div>
+
+      <div class="card">
+        <img src="img/smart.gif" alt="smart.gif" loading="lazy" />
+        <div class="overlay">
+          <a class="link-btn" href="img/smart.gif" target="_blank" aria-label="Abrir smart.gif">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+              <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+            </svg>
+          </a>
+        </div>
+        <div class="filename">smart.gif</div>
+      </div>
+
+      <div class="card">
+        <img src="img/success.png" alt="success.png" loading="lazy" />
+        <div class="overlay">
+          <a class="link-btn" href="img/success.png" target="_blank" aria-label="Abrir success.png">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+              <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+            </svg>
+          </a>
+        </div>
+        <div class="filename">success.png</div>
+      </div>
+
+      <div class="card">
+        <img src="img/terminator-look.gif" alt="terminator-look.gif" loading="lazy" />
+        <div class="overlay">
+          <a class="link-btn" href="img/terminator-look.gif" target="_blank" aria-label="Abrir terminator-look.gif">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+              <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+            </svg>
+          </a>
+        </div>
+        <div class="filename">terminator-look.gif</div>
+      </div>
+
+      <div class="card">
+        <img src="img/terminator.png" alt="terminator.png" loading="lazy" />
+        <div class="overlay">
+          <a class="link-btn" href="img/terminator.png" target="_blank" aria-label="Abrir terminator.png">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+              <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+            </svg>
+          </a>
+        </div>
+        <div class="filename">terminator.png</div>
+      </div>
+
+      <div class="card">
+        <img src="img/terminator1.png" alt="terminator1.png" loading="lazy" />
+        <div class="overlay">
+          <a class="link-btn" href="img/terminator1.png" target="_blank" aria-label="Abrir terminator1.png">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+              <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+            </svg>
+          </a>
+        </div>
+        <div class="filename">terminator1.png</div>
+      </div>
+
+      <div class="card">
+        <img src="img/terminator2.png" alt="terminator2.png" loading="lazy" />
+        <div class="overlay">
+          <a class="link-btn" href="img/terminator2.png" target="_blank" aria-label="Abrir terminator2.png">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+              <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+            </svg>
+          </a>
+        </div>
+        <div class="filename">terminator2.png</div>
+      </div>
+
+      <div class="card">
+        <img src="img/terminator2_t1000-nope.gif" alt="terminator2_t1000-nope.gif" loading="lazy" />
+        <div class="overlay">
+          <a class="link-btn" href="img/terminator2_t1000-nope.gif" target="_blank" aria-label="Abrir terminator2_t1000-nope.gif">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+              <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+            </svg>
+          </a>
+        </div>
+        <div class="filename">terminator2_t1000-nope.gif</div>
+      </div>
+
+      <div class="card">
+        <img src="img/terminator_thumbs_up.gif" alt="terminator_thumbs_up.gif" loading="lazy" />
+        <div class="overlay">
+          <a class="link-btn" href="img/terminator_thumbs_up.gif" target="_blank" aria-label="Abrir terminator_thumbs_up.gif">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+              <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+            </svg>
+          </a>
+        </div>
+        <div class="filename">terminator_thumbs_up.gif</div>
+      </div>
+
+      <div class="card">
+        <img src="img/thisisfine.gif" alt="thisisfine.gif" loading="lazy" />
+        <div class="overlay">
+          <a class="link-btn" href="img/thisisfine.gif" target="_blank" aria-label="Abrir thisisfine.gif">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+              <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+            </svg>
+          </a>
+        </div>
+        <div class="filename">thisisfine.gif</div>
+      </div>
+
+      <div class="card">
+        <img src="img/typingcat.gif" alt="typingcat.gif" loading="lazy" />
+        <div class="overlay">
+          <a class="link-btn" href="img/typingcat.gif" target="_blank" aria-label="Abrir typingcat.gif">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+              <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+            </svg>
+          </a>
+        </div>
+        <div class="filename">typingcat.gif</div>
+      </div>
     </div>
 
+    <div class="tip">
+      Tip: pasa el mouse sobre una imagen y haz clic en el icono de link para abrirla. Desde allí copias la URL.
+    </div>
   </main>
-
-  <div id="toast" class="toast" role="status" aria-live="polite">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
-      <polyline points="20 6 9 17 4 12"></polyline>
-    </svg>
-    <span>Link copiado al portapapeles</span>
-  </div>
-
-  <script>
-    // Agrega tus imágenes aquí. Sube el archivo a docs/img/ y añade un objeto al array.
-    const IMAGES = /* IMAGES_PLACEHOLDER */[
-  {
-    "name": "alert.gif",
-    "url": "img/alert.gif",
-    "type": "image/gif"
-  },
-  {
-    "name": "beme1.png",
-    "url": "img/beme1.png",
-    "type": "image/png"
-  },
-  {
-    "name": "beme2.png",
-    "url": "img/beme2.png",
-    "type": "image/png"
-  },
-  {
-    "name": "smart.gif",
-    "url": "img/smart.gif",
-    "type": "image/gif"
-  },
-  {
-    "name": "success.png",
-    "url": "img/success.png",
-    "type": "image/png"
-  },
-  {
-    "name": "terminator-look.gif",
-    "url": "img/terminator-look.gif",
-    "type": "image/gif"
-  },
-  {
-    "name": "terminator.png",
-    "url": "img/terminator.png",
-    "type": "image/png"
-  },
-  {
-    "name": "terminator1.png",
-    "url": "img/terminator1.png",
-    "type": "image/png"
-  },
-  {
-    "name": "terminator2.png",
-    "url": "img/terminator2.png",
-    "type": "image/png"
-  },
-  {
-    "name": "terminator2_t1000-nope.gif",
-    "url": "img/terminator2_t1000-nope.gif",
-    "type": "image/gif"
-  },
-  {
-    "name": "terminator_thumbs_up.gif",
-    "url": "img/terminator_thumbs_up.gif",
-    "type": "image/gif"
-  },
-  {
-    "name": "thisisfine.gif",
-    "url": "img/thisisfine.gif",
-    "type": "image/gif"
-  },
-  {
-    "name": "typingcat.gif",
-    "url": "img/typingcat.gif",
-    "type": "image/gif"
-  }
-]/* IMAGES_PLACEHOLDER */;
-  </script>
-  <script>
-    (function () {
-      const grid = document.getElementById("grid");
-      const empty = document.getElementById("empty");
-      const toast = document.getElementById("toast");
-
-      const images = Array.isArray(window.IMAGES) ? window.IMAGES : [];
-      console.log("[img repo] loaded images:", images.length, images);
-
-      function getAbsoluteUrl(path) {
-        return new URL(path, window.location.href).href;
-      }
-
-      function showToast() {
-        toast.classList.add("show");
-        clearTimeout(showToast.timeout);
-        showToast.timeout = setTimeout(() => toast.classList.remove("show"), 2200);
-      }
-
-      async function copyLink(url, event) {
-        event.stopPropagation();
-        const absoluteUrl = getAbsoluteUrl(url);
-        try {
-          await navigator.clipboard.writeText(absoluteUrl);
-          showToast();
-        } catch (err) {
-          const textarea = document.createElement("textarea");
-          textarea.value = absoluteUrl;
-          textarea.style.position = "fixed";
-          textarea.style.opacity = "0";
-          document.body.appendChild(textarea);
-          textarea.select();
-          try {
-            document.execCommand("copy");
-            showToast();
-          } catch (_) {
-            window.open(absoluteUrl, "_blank");
-          }
-          document.body.removeChild(textarea);
-        }
-      }
-
-      function createCard(image) {
-        const card = document.createElement("div");
-        card.className = "card";
-        card.setAttribute("role", "button");
-        card.setAttribute("tabindex", "0");
-        card.setAttribute("aria-label", image.name);
-
-        const isVideo = image.type && image.type.startsWith("video/");
-        const media = document.createElement(isVideo ? "video" : "img");
-        media.src = image.url;
-        media.alt = image.name;
-        if (isVideo) {
-          media.autoplay = true;
-          media.loop = true;
-          media.muted = true;
-          media.playsInline = true;
-        } else {
-          media.loading = "lazy";
-        }
-
-        const overlay = document.createElement("div");
-        overlay.className = "overlay";
-
-        const copyBtn = document.createElement("button");
-        copyBtn.className = "copy-btn";
-        copyBtn.type = "button";
-        copyBtn.setAttribute("aria-label", "Copiar link de " + image.name);
-        copyBtn.innerHTML = `
-          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-            <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
-            <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
-          </svg>
-        `;
-        copyBtn.addEventListener("click", (e) => copyLink(image.url, e));
-
-        const filename = document.createElement("div");
-        filename.className = "filename";
-        filename.textContent = image.name;
-
-        overlay.appendChild(copyBtn);
-        card.appendChild(media);
-        card.appendChild(overlay);
-        card.appendChild(filename);
-
-        // Click en la tarjeta también abre la imagen
-        card.addEventListener("click", () => {
-          window.open(image.url, "_blank");
-        });
-
-        // Enter/Space en tarjeta enfocada
-        card.addEventListener("keydown", (e) => {
-          if (e.key === "Enter" || e.key === " ") {
-            e.preventDefault();
-            window.open(image.url, "_blank");
-          }
-        });
-
-        return card;
-      }
-
-      function render(items) {
-        grid.innerHTML = "";
-        if (images.length === 0) {
-          empty.style.display = "block";
-          grid.style.display = "none";
-          return;
-        }
-
-        empty.style.display = "none";
-        grid.style.display = "grid";
-        items.forEach((image) => grid.appendChild(createCard(image)));
-      }
-
-      render(images);
-    })();
-  </script>
 </body>
 </html>
