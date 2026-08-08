@@ -1,45 +1,38 @@
 # img
 
-Repositorio personal de imágenes y GIFs con un sitio estático al estilo Giphy, listo para GitHub Pages desde la carpeta `/docs` en la rama `main`.
+Repositorio personal de imágenes y GIFs con un sitio estático al estilo Giphy.
 
 ## Cómo funciona
 
-- Subes tus imágenes a la carpeta `img/` en la raíz del repo y haces push a `main`.
-- Un **GitHub Action** genera automáticamente la carpeta `docs/` con:
-  - `docs/index.html` (con las imágenes embebidas directamente)
-  - `docs/img/` (copia de tus imágenes)
-  - `docs/CNAME` (para tu dominio personalizado)
-- GitHub Pages sirve el sitio desde `/docs` en la rama `main`.
-- **No toques la carpeta `docs/` manualmente.** Se regenera automáticamente.
+GitHub Pages sirve el sitio desde la carpeta `/docs` en la rama `main`.
 
-## Subir una nueva imagen
+## Agregar una imagen
 
-1. Copia tu imagen o GIF a la carpeta `img/` (en la raíz del repo).
-2. Haz commit y push a `main`:
+1. Sube tu imagen o GIF a la carpeta `docs/img/`.
+2. Abre `docs/index.html` y agrega un objeto al array `IMAGES`:
+
+   ```javascript
+   {
+     "name": "mi-imagen.gif",
+     "url": "img/mi-imagen.gif",
+     "type": "image/gif"
+   }
+   ```
+
+3. Haz commit y push a `main`:
 
    ```bash
-   git pull origin main
-   cp mi-imagen.gif img/
-   git add img/mi-imagen.gif
+   git add docs/
    git commit -m "add: mi-imagen.gif"
    git push origin main
    ```
 
-3. GitHub Actions regenerará la carpeta `docs/` y hará push del cambio a `main`.
 4. Espera unos segundos/minutos a que GitHub Pages actualice el sitio.
-
-> **Importante:** como GitHub Actions modifica `main` con la carpeta `docs/` actualizada, antes de tu próximo cambio local ejecuta:
->
-> ```bash
-> git pull origin main
-> ```
 
 ## Activar GitHub Pages
 
-Tu repo ya está configurado para servir desde `/docs` en `main`. Si necesitas verificarlo:
-
 1. Ve a **Settings** → **Pages** en tu repositorio.
-2. En **Build and deployment** debe decir:
+2. En **Build and deployment** selecciona:
    - **Source:** Deploy from a branch
    - **Branch:** `main` → `/docs` folder
 3. Guarda y espera a que la URL esté disponible.
@@ -48,16 +41,12 @@ Tu repo ya está configurado para servir desde `/docs` en `main`. Si necesitas v
 
 ```
 /
-├── .github/workflows/build.yml   # GitHub Action que genera docs/
-├── img/                          # TUS IMÁGENES (agrega aquí)
-├── src/                          # Código fuente del sitio
-│   ├── index.html
-│   └── build.py
-├── docs/                         # Sitio generado (NO editar manualmente)
-│   ├── index.html
-│   ├── img/
-│   └── CNAME
-├── CNAME                         # Dominio personalizado
+├── docs/              # Sitio que se sirve en GitHub Pages
+│   ├── index.html     # Edita este archivo para agregar imágenes
+│   ├── img/           # Tus imágenes y GIFs
+│   └── CNAME          # Dominio personalizado
+├── img/               # Copia de respaldo de tus imágenes (opcional)
+├── CNAME              # Dominio personalizado
 └── README.md
 ```
 
