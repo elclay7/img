@@ -1,0 +1,46 @@
+name: Build image catalog
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "img/**"
+      - "index.html"
+      - "build.py"
+      - ".github/workflows/**"
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+
+      - name: Build docs site
+        run: |
+          rm -rf docs
+          mkdir -p docs/img
+          cp index.html docs/
+          cp img/* docs/img/
+          python build.py --img-dir docs/img --output docs/images.js
+
+      - name: Commit and push docs
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add docs/
+          if git diff --cached --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "chore: update docs site [skip ci]"
+            git push
+          fi
