@@ -12,12 +12,10 @@ Hecho solo con **HTML y CSS**. No usa JavaScript.
 
 ## Estructura
 
-/
 ├── docs/              # Sitio que se sirve en GitHub Pages
 │   ├── index.html     # Edita este archivo para agregar imágenes
 │   ├── img/           # Tus imágenes y GIFs
 │   └── CNAME          # Dominio personalizado
-├── CNAME              # Dominio personalizado
 └── README.md
 
 ## Funciones del sitio
